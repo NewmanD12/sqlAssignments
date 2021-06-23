@@ -10,12 +10,14 @@ c = conn.cursor()
 
 c.execute("""DROP TABLE passengers""")
 
-c.execute("""CREATE TABLE passengers (
+c.execute(
+  """CREATE TABLE passengers (
   passengerid TEXT,
   name TEXT,
   age TEXT
   )
-""")
+"""
+)
 
 
 with open('titanic.csv', 'r') as fin:
@@ -34,6 +36,7 @@ with open('titanic.csv', 'r') as fin:
     allPassengers.append(passengerAge)
     # print(float(passengerAge))
     neededValues.append(tuple(allPassengers))
+    print(dr.fieldnames)
 
   # print(neededValues)
 
