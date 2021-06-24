@@ -159,7 +159,7 @@ with open('World_country_populations.csv', 'r') as fin:
     landAreaKm2 = entry.get('land_area_km2')
     migrants = entry.get('migrants')
     fertilityRate = entry.get('fertility_rate')
-    medianAge = entry.get('Median_age')
+    medianAge =  entry.get('Median_age')
     urbanPopPct = entry.get('Urban_pop_pct')
     worldShare = entry.get('World_share')
 
@@ -188,9 +188,9 @@ conn.commit()
 c.execute(''' SELECT country, population FROM countries ORDER BY population DESC''')
 conn.commit()
 
-# countries = c.fetchmany(20)
+countries = c.fetchmany(20)
 # for country in countries:
-#   print(country)
+  # print(country[0], '- population in mm', (country[1] / 1000000))
 
 
 # 2 - What is the total world population
@@ -205,20 +205,19 @@ for country in countries:
 
 # 3 - Top 10 countries by median age
 c.execute(''' SELECT country, median_age FROM countries
-  WHERE median_age != 'N.A.'
-  ORDER BY median_age  DESC
+  WHERE median_age IS NOT 'N.A.'
+  ORDER BY median_age DESC
  ''')
 conn.commit()
 
 countries = c.fetchmany(10)
 # for country in countries:
-#   print(country)
+#   # print(country)
 #   print(country[0],'- median age is', country[1] )
 
 # 4 - Top 10 countries where people left
-c.execute(''' SELECT country, migrants FROM countries 
-  WHERE migrants != ''
-  ORDER BY migrants
+c.execute(''' SELECT country, net_change FROM countries 
+  ORDER BY net_change
  ''')
 conn.commit()
 countries = c.fetchmany(10)
@@ -246,6 +245,21 @@ conn.commit()
 countries = c.fetchmany(10)
 # for country in countries:
 #   print(country[0], '- year change', country[2], '- population', country[1])
+
+
+# 1)total number of migrants from G7 nations, 2) total ratio of G7 against total intake of migrants (What percentage?)
+
+# countriesTuple = ('Canada', 'France','Germany','Italy','Japan','United Kingdom', 'United States')
+# c.execute("""SELECT migrants, country FROM countries WHERE country IN {0} AND migrants > 0""".format(str(countriesTuple)))
+# conn.commit()
+
+c.execute(""" SELECT migrants, country from countries WHERE country in ('Canada', 'France', 'Germany', 'Italy', 'Japan', 'United Kingdom', 'United States') """)
+conn.commit()
+
+g7Migrants = c.fetchone()
+print(g7Migrants)
+
+
 
 
 
