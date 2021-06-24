@@ -109,5 +109,61 @@ def makePyramid(num):
 
 ##################################################################################################################################################################################################################
 
+def createDeckOfCards():
+  cardTypes = ['Hearts', 'Diamonds', 'Spades', 'Clubs']
+  royals = ['Jack', 'Queen', 'King', 'Ace']
+  deckOfCards = []
+  for i in range(2,11):
+    # print(i)
+    for j in range(len(cardTypes)):
+      card = str(i) + '-' + cardTypes[j]
+      deckOfCards.append(card)
+  
+  for r in range(len(royals)):
+    for j in range(len(cardTypes)):
+      card = royals[r] + '-' + cardTypes[j]
+      # print(card)
+      deckOfCards.append(card)
+      # print(royals[r], cardTypes[j])
+
+  # print(len(deckOfCards))
+  # print(deckOfCards)
+  return deckOfCards
+
+createDeckOfCards()
+
+##################################################################################################################################################################################################################
+purchases = {'2021-01-01': 
+  {'item-001': 
+      {'name': 'Alka Seltzer'},
+  'item-002': 
+      {'name': 'Rolaids'},
+  'item-003': 
+      {'name': 'Orange juice'}  }                
+}
+
+purchases['2021-01-01']['item-004'] = {'name' : 'Bloody Mary'}
+purchases['2021-01-01']['item-005'] = {'name' : 'Pineapple Juice'}
+
+print(purchases)
+print([ v['name'] for k,v in purchases['2021-01-01'].items() if v['name'].lower().endswith('juice')])
 
 
+##################################################################################################################################################################################################################
+import itertools
+numbers = [2,7,9,12,15,3,11,22,17,6,0,-8]
+
+def findCombosThatAddUpTo9(list):
+  listOfCombos = []
+  for i in range(len(list)):  
+    for j in range(i, len(list)):
+      # print(list[i] + list[j])
+      if(list[i] + list[j] == 9):
+        combos = (list[i], list[j])
+        if(combos not in listOfCombos):
+          listOfCombos.append(combos)
+        # print(combos)
+  print(listOfCombos)
+  return listOfCombos
+
+# findCombosThatAddUpTo9(numbers)
