@@ -47,3 +47,25 @@ def findMostCommonLetter(str):
   return mostUsedLetter
 
 # findMostCommonLetter(text)
+
+
+ignoredWords = []
+
+with open('function_words.txt', 'r') as fin:
+  for line in fin.readlines(): 
+    line = line.strip()   
+    ignoredWords.append(line)
+
+# print(ignoredWords)
+
+dictOfWords = {}
+textWords = text.lower().split()
+
+for word in textWords:
+  # print(word)
+  if(word not in ignoredWords and word not in dictOfWords):
+    dictOfWords[word] = 1
+  elif(word not in ignoredWords and word in dictOfWords):
+    dictOfWords[word] += 1
+
+print(dictOfWords)
