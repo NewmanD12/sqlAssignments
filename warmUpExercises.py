@@ -68,4 +68,62 @@ for word in textWords:
   elif(word not in ignoredWords and word in dictOfWords):
     dictOfWords[word] += 1
 
-print(dictOfWords)
+# print(dictOfWords)
+
+##########################################################################################################################################################################################################################################
+text2 = 'THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG'
+
+
+def ceasersCipher(str):
+  alphabetList = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+
+  crypticString = ''
+
+  str = str.lower()
+  for x in range(len(str)):
+    # print(str[x])
+    if(str[x] in alphabetList):
+      for j in range(len(alphabetList)):
+        if(alphabetList[j] == str[x]):
+          crypticString += alphabetList[j - 3]
+    elif(str[x] == " "):
+      crypticString += str[x]
+
+
+
+  print(crypticString)
+
+# ceasersCipher(text2)
+
+
+def ceasersCipher2(num, shift, str):
+
+  alphabetList = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+
+  crypticString = ''
+
+  shift = shift.lower()
+  shift = shift[:1]
+    
+
+  str = str.lower()
+  for x in range(len(str)):
+    if(str[x] in alphabetList):
+      for j in range(len(alphabetList)):
+        if(alphabetList[j] == str[x] and shift == 'l'):
+          crypticString += alphabetList[j - num]
+        elif(alphabetList[j] == str[x] and shift == 'r' and j + x > len(alphabetList)):
+          remainder = j + x - len(alphabetList)
+          print(remainder)
+
+          # crypticString += alphabetList[j + num]
+        elif(alphabetList[j] == str[x] and shift == 'r' and j + x <= len(alphabetList)):
+          crypticString += alphabetList[j + num]
+    elif(str[x] == ' '):
+      crypticString += str[x]
+
+  # print(crypticString)
+      
+      
+
+ceasersCipher2(4, 'right', text2)
